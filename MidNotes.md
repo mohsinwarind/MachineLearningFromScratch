@@ -67,13 +67,15 @@ An objective function defines what the learning algorithm tries to optimize. It 
 Different tasks use different evaluation measures.
 
 - Classification: Accuracy, precision, recall, F1-score, or log loss.
-- Regression: Mean Absolute Error (MAE), Mean Squared Error (MSE), or \\(R^2\\).
+- Regression: Mean Absolute Error (MAE), Mean Squared Error (MSE), or $R^2$.
 
 For example, in a regression task, Mean Squared Error measures the average squared difference between actual and predicted values:
 
-\\[ MSE=\frac{1}{n}\sum\_{i=1}^{n}(y_i-\hat y_i)^2 \\]
+$$
+ MSE=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat y_i)^2
+$$
 
-Here, \\(y_i\\) is the actual value, \\(\hat y_i\\) is the predicted value, and \\(n\\) is the number of observations. Lower MSE generally indicates better predictions on the evaluated dataset.
+Here, $y_i$ is the actual value, $\hat y_i$ is the predicted value, and $n$ is the number of observations. Lower MSE generally indicates better predictions on the evaluated dataset.
 
 ## 1.3 Reasoning modes: deduction and induction
 
@@ -107,11 +109,11 @@ Connection to machine learning: Machine learning automates aspects of inductive 
 
 Tom Mitchell's definition describes learning through three components:
 
-- \\(T\\): Task — what the program is required to do.
-- \\(E\\): Experience — the data or experience from which it learns.
-- \\(P\\): Performance measure — how success is evaluated.
+- $T$: Task — what the program is required to do.
+- $E$: Experience — the data or experience from which it learns.
+- $P$: Performance measure — how success is evaluated.
 
-A program learns from experience \\(E\\) with respect to task \\(T\\) and performance measure \\(P\\) if its performance at task \\(T\\), measured by \\(P\\), improves with experience \\(E\\).
+A program learns from experience $E$ with respect to task $T$ and performance measure $P$ if its performance at task $T$, measured by $P$, improves with experience $E$.
 
 ### Example: Email spam detection
 
@@ -177,7 +179,9 @@ It is particularly useful for complex data such as images, audio, natural langua
 
 The relationship is:
 
-\\[ \text{Deep Learning}\subseteq\text{Machine Learning}\subseteq\text{Artificial Intelligence} \\]
+$$
+ \text{Deep Learning}\subseteq\text{Machine Learning}\subseteq\text{Artificial Intelligence}
+$$
 
 In other words, deep learning is part of machine learning, and machine learning is part of AI.
 
@@ -273,21 +277,24 @@ A feature with a much larger numerical range can dominate certain distance calcu
 
 Standardization transforms a feature using its mean and standard deviation:
 
-\\[ z=\frac{x-\mu}{\sigma} \\]
+$$
+z = \frac{x - \mu}{\sigma}
+$$
 
 Where:
 
-- \\(x\\) is the original value.
-- \\(\mu\\) is the training feature's mean.
-- \\(\sigma\\) is the training feature's standard deviation.
-- \\(z\\) is the standardized value.
+- $x$ is the original value.
+- $\mu$ is the training feature's mean.
+- $\sigma$ is the training feature's standard deviation.
+- $z$ is the standardized value.
+
 
 The transformed feature generally has a mean near zero and a standard deviation near one on the training data, assuming nonzero variance.
 
 ### Python example
 
 ```python
-import pandas as pdfrom sklearn.preprocessing 
+import pandas as pdfrom sklearn.preprocessing
 import StandardScalerdf = pd.DataFrame({    "ResearchScore": [2, 4, 6, 8, 10],    "ProjectScore": [100, 300, 500, 700, 900]})
 
 scaler = StandardScaler()scaled_values = scaler.fit_transform(    df[["ResearchScore", "ProjectScore"]])scaled_df = pd.DataFrame(    scaled_values,    columns=["ResearchScore", "ProjectScore"])
@@ -346,16 +353,18 @@ Despite its name, it estimates class probabilities using a logistic function. In
 
 The logistic function is:
 
-\\[ P(y=1\mid x)=\frac{1}{1+e^{-z}} \\]
+$$
+ P(y=1\mid x)=\frac{1}{1+e^{-z}}
+$$
 
-where \\(z\\) is the weighted sum of the input features, including the model's intercept.
+where $z$ is the weighted sum of the input features, including the model's intercept.
 
 The resulting probability lies between 0 and 1. A decision threshold, often 0.5 by default, can be used to convert that probability into a predicted class.
 
 ### Python example
 
 ```python
-import pandas as pdfrom sklearn.linear_model 
+import pandas as pdfrom sklearn.linear_model
 import LogisticRegressionX = pd.DataFrame({    "ResearchScore": [0.2, 0.4, 0.6, 0.8, 1.0, 0.3],    "ProjectScore": [0.1, 0.3, 0.5, 0.7, 0.9, 0.2]})y = ["No", "No", "No", "Yes", "Yes", "No"]
 
 model = LogisticRegression()
@@ -513,9 +522,9 @@ Example: A game-playing agent tries different actions and learns strategies from
 
 ### K-Means: Centroid-based clustering
 
-K-Means divides observations into a specified number \\(K\\) of clusters. It assigns each observation to a cluster centroid and repeatedly updates the centroids to reduce within-cluster squared distances.
+K-Means divides observations into a specified number $K$ of clusters. It assigns each observation to a cluster centroid and repeatedly updates the centroids to reduce within-cluster squared distances.
 
-It is relatively efficient for many numerical datasets but requires choosing \\(K\\), is sensitive to scaling and initialization, and can struggle with irregular cluster shapes.
+It is relatively efficient for many numerical datasets but requires choosing $K$, is sensitive to scaling and initialization, and can struggle with irregular cluster shapes.
 
 ### Hierarchical clustering
 
@@ -634,9 +643,9 @@ The displayed spacing in the TSV example represents tab-separated fields.
 
 ```python
 import pandas as pd
-# Read a CSV 
+# Read a CSV
 filedf_csv = pd.read_csv("students.csv")
-# Read a TSV 
+# Read a TSV
 filedf_tsv = pd.read_csv("students.tsv", sep="\t")
 
 print(df_csv.head())
@@ -684,7 +693,7 @@ The data type matters because it determines which operations are appropriate. Fo
 
 ### `df.head(n)`
 
-Displays the first \\(n\\) rows.
+Displays the first $n$ rows.
 
 ```
 print(df.head(5))
@@ -987,9 +996,11 @@ Normalization is often used to describe rescaling values to a common range. More
 
 The min-max formula is:
 
-\\[ x'=\frac{x-x\_{\min}}{x\_{\max}-x\_{\min}} \\]
+$$
+ x'=\frac{x-x_{\min}}{x_{\max}-x_{\min}}
+$$
 
-It usually maps a feature to the interval \\([0,1]\\) when the minimum and maximum are calculated from the data being transformed.
+It usually maps a feature to the interval $[0,1]$ when the minimum and maximum are calculated from the data being transformed.
 
 ```python
 from sklearn.preprocessing import MinMaxScalerscaler = MinMaxScaler()
@@ -1118,7 +1129,9 @@ Removal is not automatically the best choice for large datasets; the reason for 
 
 Mean imputation replaces missing numerical values with the arithmetic mean of the observed values.
 
-\\[ \bar{x}=\frac{1}{n}\sum\_{i=1}^{n}x_i \\]
+$$
+ \bar{x}=\frac{1}{n}\sum_{i=1}^{n}x_i
+$$
 
 Example:
 
@@ -1320,7 +1333,9 @@ Feature engineering can also create new variables by combining existing features
 
 For example, a dataset might contain total distance and total travel time. A new feature can be created to represent average speed.
 
-\\[ \text{Average Speed}=\frac{\text{Distance}}{\text{Time}} \\]
+$$
+ \text{Average Speed}=\frac{\text{Distance}}{\text{Time}}
+$$
 
 ```python
 import pandas as pd
@@ -1435,21 +1450,23 @@ For example, the effect of study hours on examination marks may differ depending
 
 An interaction model can be expressed as:
 
-\\[ y=c_0+c_1x_1+c_2x_2+c\_{12}(x_1x_2) \\]
+$$
+ y=c_0+c_1x_1+c_2x_2+c_{12}(x_1x_2)
+$$
 
 Where:
 
-- \\(x_1\\) and \\(x_2\\) are input features.
-- \\(c_0\\) is the intercept.
-- \\(c_1\\) and \\(c_2\\) represent individual feature effects.
-- \\(c\_{12}\\) represents the interaction effect.
+- $x_1$ and $x_2$ are input features.
+- $c_0$ is the intercept.
+- $c_1$ and $c_2$ represent individual feature effects.
+- $c_{12}$ represents the interaction effect.
 
-The product \\(x_1x_2\\) is a new feature.
+The product $x_1x_2$ is a new feature.
 
 ### Python example
 
 ```python
-import pandas as pdfrom sklearn.preprocessing 
+import pandas as pdfrom sklearn.preprocessing
 import PolynomialFeaturesX = pd.DataFrame({    "StudyHours": [2, 4, 6],    "Attendance": [60, 80, 95]})poly = PolynomialFeatures(    degree=2,    interaction_only=True,    include_bias=False)X_new = poly.fit_transform(X)
 
 print(poly.get_feature_names_out(X.columns))
@@ -1512,14 +1529,16 @@ However, a transformation does not guarantee that the resulting distribution wil
 
 A logarithmic transformation compresses large values more strongly than small values.
 
-For a logarithm with base \\(b\\):
+For a logarithm with base $b$:
 
-\\[ y=\log_b(x) \\]
+$$
+ y=\log_b(x)
+$$
 
 Common choices are:
 
-- Natural logarithm: \\(\ln(x)\\), base \\(e\\).
-- Common logarithm: \\(\log\_{10}(x)\\), base 10.
+- Natural logarithm: $\ln(x)$, base $e$.
+- Common logarithm: $\log_{10}(x)$, base 10.
 
 For example, the natural logarithm of 10,000 is much smaller than 10,000 itself. This compression can reduce the impact of very large observations.
 
@@ -1536,7 +1555,7 @@ df["LogViews"] = np.log1p(df["Views"])
 print(df)
 ```
 
-`np.log1p(x)` calculates \\(\ln(1+x)\\). It is often convenient for nonnegative data containing zeros because the transformation remains defined at zero.
+`np.log1p(x)` calculates $\ln(1+x)$. It is often convenient for nonnegative data containing zeros because the transformation remains defined at zero.
 
 For strictly positive values, `np.log(x)` can be used directly.
 
@@ -1554,22 +1573,24 @@ For strictly positive values, `np.log(x)` can be used directly.
 
 ## 12.4 Box-Cox transformation
 
-The Box-Cox transformation is a family of power transformations controlled by a parameter \\(\lambda\\).
+The Box-Cox transformation is a family of power transformations controlled by a parameter $\lambda$.
 
-It is defined for positive values \\(x>0\\) as:
+It is defined for positive values $x>0$ as:
 
-\\[ y^{(\lambda)}= \begin{cases} \dfrac{x^\lambda-1}{\lambda}, & \lambda\ne0\\\\[6pt] \ln(x), & \lambda=0 \end{cases} \\]
+$$
+ y^{(\lambda)}= \begin{cases} \dfrac{x^\lambda-1}{\lambda}, & \lambda\ne0\\[6pt] \ln(x), & \lambda=0 \end{cases}
+$$
 
-The parameter \\(\lambda\\) determines the transformation applied to the data.
+The parameter $\lambda$ determines the transformation applied to the data.
 
-Different values of \\(\lambda\\) correspond to different transformations. When \\(\lambda=1\\), the result is \\(x-1\\), which is essentially a shift by a constant. When \\(\lambda=0\\), the transformation becomes the natural logarithm.
+Different values of $\lambda$ correspond to different transformations. When $\lambda=1$, the result is $x-1$, which is essentially a shift by a constant. When $\lambda=0$, the transformation becomes the natural logarithm.
 
-An optimal value of \\(\lambda\\) can be estimated statistically, commonly using maximum likelihood under a distributional model.
+An optimal value of $\lambda$ can be estimated statistically, commonly using maximum likelihood under a distributional model.
 
 ### Python example
 
 ```python
-import numpy as npfrom scipy.stats 
+import numpy as npfrom scipy.stats
 import boxcoxdata = np.array([10, 20, 50, 100, 500])
 
 transformed_data, estimated_lambda = boxcox(data)
@@ -1656,7 +1677,7 @@ print(encoded_df)
 ### Python example using `OneHotEncoder`
 
 ```python
-import pandas as pdfrom sklearn.preprocessing 
+import pandas as pdfrom sklearn.preprocessing
 import OneHotEncoderdf = pd.DataFrame({    "Color": ["Red", "Blue", "Green", "Red"]})encoder = OneHotEncoder(    handle_unknown="ignore",    sparse_output=False)
 
 encoded = encoder.fit_transform(df[["Color"]])
@@ -1850,7 +1871,7 @@ print(X.toarray())
 
 ## 14.4 Bag of N-Grams
 
-N-grams are sequences of \\(N\\) consecutive tokens.
+N-grams are sequences of $N$ consecutive tokens.
 
 Common examples include:
 
@@ -1911,13 +1932,15 @@ TF-IDF represents words according to how frequently they appear in a document an
 
 The general relationship is:
 
-\\[ \operatorname{TFIDF}(t,d,D) = \operatorname{TF}(t,d) \times \operatorname{IDF}(t,D) \\]
+$$
+ \operatorname{TFIDF}(t,d,D) = \operatorname{TF}(t,d) \times \operatorname{IDF}(t,D)
+$$
 
 Where:
 
-- \\(t\\) is a term.
-- \\(d\\) is a document.
-- \\(D\\) is the collection of documents.
+- $t$ is a term.
+- $d$ is a document.
+- $D$ is the collection of documents.
 - TF measures the term's frequency within a document.
 - IDF reduces the weight of terms that appear in many documents.
 
@@ -2169,14 +2192,16 @@ Converting a color image to grayscale reduces the channel dimension from three v
 
 A commonly used luminance approximation is:
 
-\\[ Y=0.299R+0.587G+0.114B \\]
+$$
+ Y=0.299R+0.587G+0.114B
+$$
 
 Where:
 
-- \\(R\\) is the red intensity.
-- \\(G\\) is the green intensity.
-- \\(B\\) is the blue intensity.
-- \\(Y\\) is the grayscale intensity estimate.
+- $R$ is the red intensity.
+- $G$ is the green intensity.
+- $B$ is the blue intensity.
+- $Y$ is the grayscale intensity estimate.
 
 The exact conversion can depend on the color space and library used.
 
@@ -2256,7 +2281,9 @@ They can be calculated for grayscale images or separately for each color channel
 
 The mean is the average pixel intensity:
 
-\\[ \mu=\frac{1}{N}\sum\_{i=1}^{N}x_i \\]
+$$
+ \mu=\frac{1}{N}\sum_{i=1}^{N}x_i
+$$
 
 It provides a basic measure of overall brightness for a grayscale image.
 
@@ -2270,7 +2297,9 @@ It is less sensitive to extreme values than the mean.
 
 Variance measures how much pixel intensities vary around the mean.
 
-\\[ \sigma^2=\frac{1}{N}\sum\_{i=1}^{N}(x_i-\mu)^2 \\]
+$$
+ \sigma^2=\frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2
+$$
 
 A low variance may indicate that most pixels have similar intensities, while a high variance indicates a wider spread of brightness values.
 
