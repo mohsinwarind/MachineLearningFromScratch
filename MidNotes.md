@@ -1379,6 +1379,64 @@ from sklearn.preprocessing import MinMaxScalerscaler = MinMaxScaler()
 df[["Price"]] = scaler.fit_transform(    df[["Price"]])
 ```
 
+Formula:
+
+$$
+x' = \frac{x-x_{\min}}{x_{\max}-x_{\min}}
+$$
+
+Example: Data = $(10, 20, 30, 40, 50)$
+
+Minimum = $10$, Maximum = $50$
+
+For $x=30$:
+
+$$
+x' = \frac{30-10}{50-10}
+$$
+
+$$
+= \frac{20}{40} = \boxed{0.5}
+$$
+
+For all values:
+
+For $x=10$:
+
+$$
+x' = \frac{10-10}{50-10} = \boxed{0}
+$$
+
+For $x=20$:
+
+$$
+x' = \frac{20-10}{50-10} = \boxed{0.25}
+$$
+
+For $x=30$:
+
+$$
+x' = \frac{30-10}{50-10} = \boxed{0.5}
+$$
+
+For $x=40$:
+
+$$
+x' = \frac{40-10}{50-10} = \boxed{0.75}
+$$
+
+For $x=50$:
+
+$$
+x' = \frac{50-10}{50-10} = \boxed{1}
+$$
+
+Final result:
+
+$$
+(0,\ 0.25,\ 0.5,\ 0.75,\ 1)
+$$
+
 ### Standardization
 
 Standardization subtracts the mean and divides by the standard deviation. It is useful for algorithms sensitive to feature scale.
@@ -1912,6 +1970,99 @@ Common choices are:
 - Common logarithm: $\log_{10}(x)$, base 10.
 
 For example, the natural logarithm of 10,000 is much smaller than 10,000 itself. This compression can reduce the impact of very large observations.
+
+## Example: Log Transformation
+
+Suppose our data is:
+
+$$
+x = [1,\ 10,\ 100,\ 1000]
+$$
+
+### 1. Using Log Base 10
+
+**Formula:**
+
+$$
+y = \log_{10}(x)
+$$
+
+Calculate each value:
+
+$$
+\log_{10}(1) = 0
+$$
+
+Because $10^0 = 1$.
+
+$$
+\log_{10}(10) = 1
+$$
+
+Because $10^1 = 10$.
+
+$$
+\log_{10}(100) = 2
+$$
+
+Because $10^2 = 100$.
+
+$$
+\log_{10}(1000) = 3
+$$
+
+Because $10^3 = 1000$.
+
+### Final Result
+
+| Original $x$ | Transformed $y = \log_{10}(x)$ |
+|---:|---:|
+| 1 | 0 |
+| 10 | 1 |
+| 100 | 2 |
+| 1000 | 3 |
+
+Notice that the original values increase dramatically, but the transformed values increase slowly.
+
+### 2. Using the Natural Logarithm
+
+The natural logarithm uses base $e \approx 2.718$.
+
+**Formula:**
+
+$$
+y = \ln(x)
+$$
+
+For example:
+
+$$
+\ln(1) = 0
+$$
+
+$$
+\ln(10) \approx 2.303
+$$
+
+$$
+\ln(100) \approx 4.605
+$$
+
+$$
+\ln(1000) \approx 6.908
+$$
+
+### Remember
+
+Log transformation compresses large positive values and is often useful for highly skewed features, such as income or ticket fares.
+
+In machine learning, a common choice is:
+
+$$
+y = \ln(1+x)
+$$
+
+This transformation also works when values include zero, because $\ln(1+0)=0$.
 
 ### Python example
 
