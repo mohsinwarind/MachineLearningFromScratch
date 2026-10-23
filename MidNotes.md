@@ -291,6 +291,137 @@ Where:
 
 The transformed feature generally has a mean near zero and a standard deviation near one on the training data, assuming nonzero variance.
 
+
+Let's do it manually, step by step, just like `StandardScaler` works behind the scenes. We'll calculate the mean, standard deviation, and standardized value for each observation, then verify the result with Python.
+## Step 1: Create a small dataset
+
+Suppose we have five students' ages:
+
+$$
+X = [10,\ 20,\ 30,\ 40,\ 50]
+$$
+
+## Step 2: Calculate the mean ($\mu$)
+
+The mean is the sum of all values divided by the number of observations.
+
+$$
+\mu = \frac{\sum x_i}{n}
+$$
+
+Substitute our values:
+
+$$
+\mu = \frac{10+20+30+40+50}{5}
+$$
+
+$$
+\boxed{\mu = 30}
+$$
+
+## Step 3: Calculate the standard deviation ($\sigma$)
+
+For `StandardScaler`, scikit-learn uses the population standard deviation (dividing by $n$, not $n-1$).
+
+The formula is:
+
+$$
+\sigma = \sqrt{\frac{\sum (x_i-\mu)^2}{n}}
+$$
+
+First, subtract the mean from each value and square the result.
+
+| $x_i$ | $x_i-\mu$ | $(x_i-\mu)^2$ |
+|---:|---:|---:|
+| 10 | -20 | 400 |
+| 20 | -10 | 100 |
+| 30 | 0 | 0 |
+| 40 | 10 | 100 |
+| 50 | 20 | 400 |
+| **Total** | **0** | **1000** |
+
+Now substitute into the formula:
+
+$$
+\sigma = \sqrt{\frac{1000}{5}}
+$$
+
+$$
+\sigma = \sqrt{200}
+$$
+
+$$
+\boxed{\sigma \approx 14.142}
+$$
+
+## Step 4: Standardize each value
+
+Now we use the formula:
+
+$$
+z = \frac{x-\mu}{\sigma}
+$$
+
+We already know:
+
+- Mean: $\mu = 30$
+- Standard deviation: $\sigma \approx 14.142$
+
+Let's calculate the first value, $x=10$:
+
+$$
+z = \frac{10-30}{14.142}
+$$
+
+$$
+z = \frac{-20}{14.142}
+$$
+
+$$
+\boxed{z \approx -1.414}
+$$
+
+Repeat this calculation for every value.
+
+| Original $x$ | Calculation | Standardized $z$ |
+|---:|---:|---:|
+| 10 | $(10-30)/14.142$ | -1.414 |
+| 20 | $(20-30)/14.142$ | -0.707 |
+| 30 | $(30-30)/14.142$ | 0.000 |
+| 40 | $(40-30)/14.142$ | 0.707 |
+| 50 | $(50-30)/14.142$ | 1.414 |
+
+### Visualizing the transformation
+
+Each original value is converted into its distance from the mean, measured in standard deviations.
+
+- **Negative z-score:** The value is below the mean.
+- **Zero z-score:** The value equals the mean.
+- **Positive z-score:** The value is above the mean.
+
+After standardization, the transformed dataset has a mean of approximately $0$ and a population standard deviation of $1$.
+
+$$
+Z \approx [-1.414,\ -0.707,\ 0,\ 0.707,\ 1.414]
+$$
+## Step 5: Verify with Python
+
+Run this in Google Colab to confirm your manual calculations:
+
+```python
+import numpy as npfrom sklearn.preprocessing import StandardScalerX = np.array([10, 20, 30, 40, 50]).reshape(-1, 1)
+# Manual calculations
+mean = np.mean(X)sd = np.std(X, ddof=0)
+z_manual = (X - mean) / sdprint("Mean:", mean)
+print("Standard deviation:", sd)
+print("Manual z-scores:", z_manual.flatten().round(3))
+# Using 
+StandardScalerscaler = StandardScaler()z_sklearn = scaler.fit_transform(X)
+print("StandardScaler z-scores:", z_sklearn.flatten().round(3))
+```
+
+
+
 ### Python example
 
 ```python
