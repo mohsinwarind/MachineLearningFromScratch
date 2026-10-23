@@ -2109,6 +2109,94 @@ Different values of $\lambda$ correspond to different transformations. When $\la
 
 An optimal value of $\lambda$ can be estimated statistically, commonly using maximum likelihood under a distributional model.
 
+# Box-Cox Transformation — Mathematical Example
+
+The Box-Cox transformation formula is:
+
+$$
+y =
+\begin{cases}
+\frac{x^\lambda - 1}{\lambda}, & \lambda \neq 0 \\[6pt]
+\ln(x), & \lambda = 0
+\end{cases}
+$$
+
+Suppose our data is:
+
+$$
+x = [1,\ 2,\ 4]
+$$
+
+Let's choose $\lambda = 0.5$.
+
+### Step 1: Apply the Formula
+
+Since $\lambda \neq 0$:
+
+$$
+y = \frac{x^{0.5}-1}{0.5}
+$$
+
+Because $x^{0.5} = \sqrt{x}$, we get:
+
+$$
+y = \frac{\sqrt{x}-1}{0.5}
+$$
+
+### Step 2: Calculate Each Value
+
+**For $x=1$:**
+
+$$
+y = \frac{\sqrt{1}-1}{0.5}
+$$
+
+$$
+= \frac{1-1}{0.5} = \boxed{0}
+$$
+
+**For $x=2$:**
+
+$$
+y = \frac{\sqrt{2}-1}{0.5}
+$$
+
+$$
+= \frac{1.4142-1}{0.5}
+$$
+
+$$
+\approx \boxed{0.8284}
+$$
+
+**For $x=4$:**
+
+$$
+y = \frac{\sqrt{4}-1}{0.5}
+$$
+
+$$
+= \frac{2-1}{0.5} = \boxed{2}
+$$
+
+### Final Result
+
+| Original $x$ | Box-Cox transformed $y$ |
+|---:|---:|
+| 1 | 0.0000 |
+| 2 | 0.8284 |
+| 4 | 2.0000 |
+
+**Important points:**
+
+- Box-Cox requires strictly positive input values ($x > 0$).
+- The parameter $\lambda$ controls the transformation.
+- When $\lambda = 0$, the Box-Cox transformation becomes the natural logarithm:
+
+$$
+y = \ln(x)
+$$
+
 ### Python example
 
 ```python
@@ -2693,7 +2781,9 @@ OpenCV is a widely used computer vision library. It supports image loading, resi
 Example of loading an image with OpenCV:
 
 ```python
-import cv2image = cv2.imread("image.jpg")if image is None:    raise FileNotFoundError("Could not load image.jpg")
+import cv2image = cv2.imread("image.jpg")
+if image is None:    
+  raise FileNotFoundError("Could not load image.jpg")
 
 print(image.shape)
 ```
@@ -2730,9 +2820,11 @@ The exact conversion can depend on the color space and library used.
 ### Python example using OpenCV
 
 ```python
-import cv2image = cv2.imread("image.jpg")if image is None:    raise FileNotFoundError("Could not load image.jpg")
+import cv2image = cv2.imread("image.jpg")
+if image is None:    
+  raise FileNotFoundError("Could not load image.jpg")
 
-gray = cv2.cvtColor(    image,    cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
 print("Original shape:", image.shape)
 
@@ -2841,11 +2933,19 @@ These statistics provide compact features for some image classification and anal
 
 ```python
 import cv2
-import numpy as npfrom scipy.stats import skew, kurtosisimage = cv2.imread("image.jpg")if image is None:    raise FileNotFoundError("Could not load image.jpg")
+import numpy as npfrom scipy.stats import skew, kurtosis
+image = cv2.imread("image.jpg")
+if image is None:    
+  raise FileNotFoundError("Could not load image.jpg")
 
 gray = cv2.cvtColor(    image,    cv2.COLOR_BGR2GRAY)
 
-pixels = gray.astype(float).ravel()mean_value = np.mean(pixels)median_value = np.median(pixels)variance_value = np.var(pixels)skewness_value = skew(pixels)kurtosis_value = kurtosis(pixels)
+pixels = gray.astype(float).ravel()
+mean_value = np.mean(pixels)
+median_value = np.median(pixels)
+variance_value = np.var(pixels)
+skewness_value = skew(pixels)
+kurtosis_value = kurtosis(pixels)
 
 print("Mean:", mean_value)
 
@@ -2879,7 +2979,12 @@ For example, a color image can be represented by:
 import cv2
 import numpy as np
 
-image = cv2.imread("image.jpg")if image is None:    raise FileNotFoundError("Could not load image.jpg")# OpenCV uses BGR channel order.channel_names = ["Blue", "Green", "Red"]for index, name in enumerate(channel_names):    channel = image[:, :, index].astype(float)    print(        name,        "Mean:", np.mean(channel),        "Variance:", np.var(channel)    )
+image = cv2.imread("image.jpg")if image is None:    raise FileNotFoundError("Could not load image.jpg")
+# OpenCV uses BGR channel order.
+channel_names = ["Blue", "Green", "Red"]
+for index, name in enumerate(channel_names):    
+  channel = image[:, :, index].astype(float)    
+  print(ame,"Mean:", np.mean(channel),        "Variance:", np.var(channel)    )
 ```
 
 Channel-wise statistics retain some color information, unlike grayscale-only statistics. However, they still summarize the image globally and do not identify where specific colors occur.
@@ -2914,6 +3019,6 @@ The central idea of these lectures is that building a machine learning system in
 5. Do not discard information unnecessarily. Binning, feature selection, grayscale conversion, and text preprocessing can simplify data but may remove useful information.
 6. Evaluate the result. A transformation is useful when it supports the task, improves appropriate evaluation measures, or makes the model more reliable or interpretable.
 
-These notes cover the topics present in your uploaded document, with expanded explanations and practical Python examples.&#x20;
 
-Pasted text.txt
+## Good Luck Guys ;)
+# Mam Saira is the best 👉👈
